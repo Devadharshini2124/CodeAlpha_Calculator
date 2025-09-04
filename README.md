@@ -23,4 +23,7 @@ The calculator supports standard arithmetic operations with a simple and interac
 
 ✅ Keyboard Support (Bonus) – Perform calculations using your keyboard.
 
+
+https://github.com/Devadharshini2124/CodeAlpha_Calculator.git
+
 ✅ Styling Enhancements (Bonus) – Smooth hover effects, modern design.
