@@ -1,0 +1,311 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Calculator Container */
+.calculator-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Main Calculator */
+.calculator {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+}
+
+.calculator:hover {
+    transform: translateY(-5px);
+}
+
+/* Display Section */
+.display-section {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: white;
+    text-align: right;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.display-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+    pointer-events: none;
+}
+
+.previous-operand {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    min-height: 20px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.current-operand {
+    font-size: 2.2rem;
+    font-weight: 300;
+    word-wrap: break-word;
+    word-break: break-all;
+    position: relative;
+    z-index: 1;
+}
+
+/* Buttons Grid */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+/* Button Base Styles */
+.btn {
+    border: none;
+    border-radius: 12px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 65px;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    outline: none;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.btn:hover::before {
+    opacity: 1;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* Number Buttons */
+.btn-number {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    color: #2c3e50;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-number:hover {
+    background: linear-gradient(135deg, #e9ecef, #dee2e6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Zero Button (spans 2 columns) */
+.btn-zero {
+    grid-column: span 2;
+}
+
+/* Operator Buttons */
+.btn-operator {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-operator:hover {
+    background: linear-gradient(135deg, #ee5a52, #dc4a3d);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.btn-operator.active {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+}
+
+/* Function Buttons */
+.btn-function {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    color: white;
+    box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+}
+
+.btn-function:hover {
+    background: linear-gradient(135deg, #0984e3, #0770c4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
+}
+
+/* Equals Button */
+.btn-equals {
+    background: linear-gradient(135deg, #00b894, #00a085);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+}
+
+.btn-equals:hover {
+    background: linear-gradient(135deg, #00a085, #008a73);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+}
+
+/* Keyboard Info */
+.keyboard-info {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666;
+    max-width: 400px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Press Animation */
+@keyframes buttonPress {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.btn.pressed {
+    animation: buttonPress 0.1s ease;
+}
+
+/* Error State */
+.display-section.error {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .calculator {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .current-operand {
+        font-size: 1.8rem;
+    }
+
+    .btn {
+        height: 55px;
+        font-size: 1.2rem;
+    }
+
+    .display-section {
+        padding: 15px;
+        min-height: 70px;
+    }
+
+    .keyboard-info {
+        font-size: 0.75rem;
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 320px) {
+    .calculator {
+        padding: 15px;
+    }
+
+    .buttons-grid {
+        gap: 8px;
+    }
+
+    .btn {
+        height: 50px;
+        font-size: 1.1rem;
+    }
+
+    .current-operand {
+        font-size: 1.6rem;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .btn-number {
+        background: linear-gradient(135deg, #495057, #343a40);
+        color: #f8f9fa;
+    }
+
+    .btn-number:hover {
+        background: linear-gradient(135deg, #343a40, #212529);
+    }
+
+    .keyboard-info {
+        background: rgba(52, 58, 64, 0.9);
+        color: #adb5bd;
+    }
+}
+
+/* Focus styles for accessibility */
+.btn:focus {
+    outline: 2px solid #4ecdc4;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn {
+        border: 2px solid #000;
+    }
+    
+    .display-section {
+        border: 2px solid #000;
+    }
+}
